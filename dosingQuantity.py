@@ -1,5 +1,4 @@
 import math
-from decimal import *
 
 expire_hrs = 24
 dosing_course = 24
