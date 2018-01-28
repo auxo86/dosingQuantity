@@ -1,19 +1,21 @@
 import math
+from decimal import *
 
-expire_hrs = 12
+expire_hrs = 24
 dosing_course = 24
 dosing_times = 4
 dosing_interval_hrs = 6
-med_contain = 1500
-each_time_dosage = 1600
-dosing_duration_days = 5
+med_contain = 2000
+each_time_dosage = 1500
+dosing_duration_days = 2
 need_units = 0
 # 每單位藥品可以投予幾次
 valid_dosing_times_per_amp = math.floor(med_contain / each_time_dosage)
-each_time_amps = math.floor(each_time_dosage / med_contain * 10) / 10
+# 10.0是必要的，否則無條件進位可能出現奇怪的狀況
+each_time_amps = math.floor(each_time_dosage / med_contain * 10) / 10.0
 '''
 [可累計次數] = 有效時數 / 給藥間隔時數
-如果有餘數無條件捨去
+如果有餘數無條件捨去，0.x就是0次，1.x就是1次，2.x就是2次
 如果沒有餘數就減一(因為就算除起來可以用兩次，到了第二次的時間也是過期了)
 '''
 if expire_hrs % dosing_interval_hrs == 0:
