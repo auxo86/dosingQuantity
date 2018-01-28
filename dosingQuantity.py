@@ -8,7 +8,7 @@ med_contain = 1500
 each_time_dosage = 1600
 dosing_duration_days = 5
 need_amps = 0
-# 每支藥品可以投予幾次
+# 每支藥品可以投予幾次。
 valid_dosing_times_per_amp = math.floor(med_contain / each_time_dosage)
 each_time_amps = math.floor(each_time_dosage / med_contain * 10) / 10
 '''
