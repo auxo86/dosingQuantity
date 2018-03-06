@@ -1,12 +1,17 @@
 import math
 
-expire_hrs = 24
+# 多久過期，以小時計
+expire_hrs = 0.5
+# 例如QID，每天給四次，每四小時給一次。每天即為dosing_course
 dosing_course = 24
-dosing_times = 4
-dosing_interval_hrs = 6
-med_contain = 2000
-each_time_dosage = 1500
-dosing_duration_days = 2
+# 例如QID，每天給四次，每四小時給一次。四次即為dosing_times
+dosing_times = 2
+# 例如QID，每天給四次，每四小時給一次。每四小時即為dosing_interval_hrs
+dosing_interval_hrs = 5
+med_contain = 75
+each_time_dosage = 37.5
+dosing_duration_days = 5
+# 最後需要幾銷售單位的參數
 need_units = 0
 # 每單位藥品可以投予幾次
 valid_dosing_times_per_amp = math.floor(med_contain / each_time_dosage)
@@ -25,8 +30,8 @@ else:
 if valid_extent_times >= 1:  # 表示可以累計
     if (valid_dosing_times_per_amp - 1) >= valid_extent_times:
         # 可以延一次就是可以用兩次，可以延兩次就是可以用三次
-        effectiive_amp_content = each_time_dosage * (valid_extent_times + 1)
-        need_units = 24 * dosing_duration_days / dosing_course * dosing_times * each_time_dosage / effectiive_amp_content
+        effective_amp_content = each_time_dosage * (valid_extent_times + 1)
+        need_units = 24 * dosing_duration_days / dosing_course * dosing_times * each_time_dosage / effective_amp_content
     else:
         need_units = 24 * dosing_duration_days / dosing_course * dosing_times * each_time_dosage / med_contain
 else:
